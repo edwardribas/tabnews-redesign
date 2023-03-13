@@ -1,0 +1,94 @@
+/* Header */
+.header {
+	z-index: var(--zindexMainNav);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 15px 35px;
+	width: 100%;
+	background-color: var(--headerBackground);
+	border-bottom: 1px solid var(--headerBorderColor);
+	transition: border-bottom .25s ease, background-color .25s ease;
+}
+.header nav {
+	width: 95%;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 30px;
+}
+.header nav ul {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	font-size: 1.1rem;
+}
+.header nav ul li {
+	cursor: pointer;
+	font-weight: 300;
+	color: var(--headerNavLinkColor);
+	transition: color .25s ease;
+}
+.header nav ul li.active {
+	font-weight: 500;
+	border-radius: 40px;
+	padding: 10px 19px;
+	background-color: var(--headerActiveNavLinkBg);
+	transition: background-color .25s ease;
+}
+.header nav > span {
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	gap: 1.8px;
+	justify-content: center;
+	border-radius: 50%;
+}
+
+/* Footer */
+.footer {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	gap: 40px;
+	flex-direction: column;
+	padding: 40px 20px 30px;
+	width: 90%;
+	margin: 100px auto 0;
+}
+
+.footer::before {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	content: '';
+	display: block;
+	margin: 0 auto;
+	height: 1px;
+	background-color: var(--footerBorderColor);
+	width: 100%;
+	max-width: 800px;
+	transition: background-color .25s ease;
+}
+
+.footer ul {
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	font-weight: 300;
+}
+
+.footer ul li {
+	cursor: pointer;
+	color: var(--footerLinkColor);
+	transition: color .25s ease;
+}
