@@ -12,30 +12,27 @@ import LogoLight from '../public/logo_light.svg';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-
 export default function RootLayout({ children }) {
 	const [screenSize, setScreenSize] = useState(1000);
+	const isDesktop = screenSize > 795;
 	const [openMobileMenu, setOpenMobileMenu] = useState(false);
-	const [theme, setTheme] = useState('dark');
-
-	const handleThemeToggle = () => {
-		const newTheme = theme === 'dark' ? 'light' : 'dark'; 
-		setTheme(newTheme);
-		localStorage.setItem('theme', newTheme);
-	};
+	const [currentTheme, setCurrentTheme] = useState('light');
+	
+	useEffect(() => {
+		localStorage.setItem('theme', currentTheme)
+	}, [currentTheme])
 
 	useEffect(() => {
+		setCurrentTheme(localStorage.getItem('theme') ?? 'dark');
 		window.onresize = () => setScreenSize(window.innerWidth);
-		const storedTheme = localStorage.getItem('theme');
-		setTheme(storedTheme ?? 'dark');
+		window.onscroll = () => setOpenMobileMenu(false);
 		setScreenSize(window.innerWidth);
-		localStorage.setItem('theme', storedTheme ?? 'dark');
 	}, []);
 
 	return (
 		<html
 			lang="en"
-			theme={theme}
+			theme={currentTheme}
 		>
 			<head>
 				<title>TabNews</title>
@@ -47,15 +44,15 @@ export default function RootLayout({ children }) {
 				<header className={styles.header}>
 					<nav>
 						<div className={styles.logotype}>
-							{screenSize > 795
+							{isDesktop
 								? <Image
-									src={theme === 'dark' ? Logotype : DarkLogotype}
+									src={currentTheme === 'dark' ? Logotype : DarkLogotype}
 									width='max-content'
 									height={25}
 									alt="Logotipo do Tabnews"
 								/> 
 								: <Image
-									src={theme === 'dark' ? LogoLight : LogoDark}
+									src={currentTheme === 'dark' ? LogoLight : LogoDark}
 									width='max-content'
 									height={25}
 									alt="Logotipo do Tabnews"
@@ -64,7 +61,7 @@ export default function RootLayout({ children }) {
 							
 						</div>
 
-						<ul className={screenSize <= 795 && openMobileMenu ? styles.active : undefined}>
+						<ul className={!isDesktop && openMobileMenu ? styles.active : undefined}>
 							<li className={styles.active}>
 								<Link href="#">
 									Relevantes
@@ -83,15 +80,15 @@ export default function RootLayout({ children }) {
 						</ul>
 
 						<div className={styles.buttons}>
-							<span onClick={handleThemeToggle}>
+							<span onClick={() => setCurrentTheme(currentTheme === 'dark' ? 'light' : 'dark')}>
 								<Image
-									src={theme === 'dark' ? SunLight : SunDark}
+									src={currentTheme === 'dark' ? SunLight : SunDark}
 									width={120}
 									height={33}
 									alt="Logotipo do Tabnews"
 								/>
 							</span>
-							{screenSize <= 795 && (
+							{!isDesktop && (
 								<span onClick={() => setOpenMobileMenu(!openMobileMenu)}>
 									<span></span>
 									<span></span>
@@ -109,7 +106,7 @@ export default function RootLayout({ children }) {
 				<footer className={styles.footer}>
 					<div className={styles.logotype}>
 						<Image
-							src={theme === 'dark' ? Logotype : DarkLogotype}
+							src={currentTheme === 'dark' ? Logotype : DarkLogotype}
 							width={120}
 							height={25}
 							alt="Logotipo do Tabnews"
