@@ -51,7 +51,7 @@ html[theme=dark] {
 }
 
 body {
-	padding-top: 145px;
+	padding-top: 130px;
 	min-height: 100vh;
 	background-color: var(--mainBackground);
 	color: var(--mainColor);

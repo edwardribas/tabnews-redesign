@@ -11,15 +11,10 @@ import LogoDark from '../public/logo_dark.svg';
 import LogoLight from '../public/logo_light.svg';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useSearchParams, usePathname } from 'next/navigation';
 
 
 export default function RootLayout({ children }) {
-	const searchParams = useSearchParams();	
-	const strategy = searchParams.get('strategy');
-	const is = (str) => !str ? !strategy : str === strategy;
-	const pathname = usePathname();
-	const [screenSize, setScreenSize] = useState(window.innerWidth);
+	const [screenSize, setScreenSize] = useState(1000);
 	const [openMobileMenu, setOpenMobileMenu] = useState(false);
 	const [theme, setTheme] = useState('dark');
 
@@ -33,6 +28,7 @@ export default function RootLayout({ children }) {
 		window.onresize = () => setScreenSize(window.innerWidth);
 		const storedTheme = localStorage.getItem('theme');
 		setTheme(storedTheme ?? 'dark');
+		setScreenSize(window.innerWidth);
 		localStorage.setItem('theme', storedTheme ?? 'dark');
 	}, []);
 
@@ -69,17 +65,17 @@ export default function RootLayout({ children }) {
 						</div>
 
 						<ul className={screenSize <= 795 && openMobileMenu ? styles.active : undefined}>
-							<li className={is() ? styles.active : null}>
+							<li className={styles.active}>
 								<Link href="#">
 									Relevantes
 								</Link>
 							</li>
-							<li className={is('new') ? styles.active : null}>
+							<li>
 								<Link href="">
 									Recentes
 								</Link>
 							</li>
-							<li className={is('liked') ? styles.active : null}>
+							<li>
 								<Link href="">
 									Salvos
 								</Link>
