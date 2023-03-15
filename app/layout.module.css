@@ -23,23 +23,32 @@
 .header nav ul {
 	display: flex;
 	align-items: center;
-	gap: 25px;
+	gap: 15px;
 	font-size: 1.1rem;
 }
-.header nav ul li {
+
+.header nav ul li a {
+	display: block;
 	cursor: pointer;
 	font-weight: 300;
-	color: var(--headerNavLinkColor);
-	transition: color .25s ease;
-}
-.header nav ul li.active {
-	font-weight: 500;
-	border-radius: 40px;
 	padding: 10px 19px;
-	background-color: var(--headerActiveNavLinkBg);
-	transition: background-color .25s ease;
+	border-radius: 40px;
+	color: var(--headerNavLinkColor);
+	transition: color .25s ease, background-color .25s ease;
 }
-.header nav > span {
+.header nav ul li a:hover {
+	background-color: rgba(60, 60, 60, .05);
+}
+.header nav ul li.active a{
+	font-weight: 500;
+	background-color: var(--headerActiveNavLinkBg);
+}
+.header .buttons {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+.header .buttons > span:first-of-type {
 	cursor: pointer;
 	width: 50px;
 	height: 50px;
@@ -47,8 +56,32 @@
 	display: flex;
 	align-items: center;
 	gap: 1.8px;
+	padding-bottom: 2px;
 	justify-content: center;
 	border-radius: 50%;
+}
+
+.header .buttons > span:nth-of-type(2) {
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	border: 1px solid var(--showMoreButtonColor);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1.8px;
+	border-radius: 50%;
+	transition: background-color .2s ease;
+}
+.header .buttons > span:nth-of-type(2):hover {
+	background-color: rgba(100, 100, 100, .1);
+}
+.header .buttons > span:nth-of-type(2) > span {
+	display: block;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background-color: var(--showMoreButtonColor);
 }
 
 /* Footer */
@@ -91,4 +124,41 @@
 	cursor: pointer;
 	color: var(--footerLinkColor);
 	transition: color .25s ease;
+}
+
+
+@media (max-width: 796px) {
+	.header nav ul {
+		position: fixed;
+		right: 10px;
+		background-color: var(--headerBackground);
+		border: 1px solid var(--headerBorderColor);
+		flex-direction: column;
+		align-items: flex-start;
+		top: 90px;
+		width: 100%;
+		max-width: 200px;
+		padding: 20px 15px;
+		border-radius: 10px;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(10px);
+		transition: opacity .2s ease, visibility .2s ease, transform .2s ease, background-color .2s ease, color .2s ease;
+	}
+	.header nav ul.active {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	.header nav ul li {
+		width: 100%;
+	}
+	.header nav ul li a {
+		width: 100%;
+		padding: 12px 16px;
+		border-radius: 8px;
+	}
+	.header nav ul li.active a {
+	}
 }

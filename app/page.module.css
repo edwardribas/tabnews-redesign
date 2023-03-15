@@ -1,9 +1,9 @@
 .posts {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 40px;
     width: 100%;
-    max-width: 775px;
+    max-width: 675px;
     margin: 0 auto;
 }
 

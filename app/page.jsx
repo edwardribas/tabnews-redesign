@@ -5,11 +5,12 @@ import Article from "./components/article";
 import styles from './page.module.css';
 
 export default function Home() {
+	const api_base_url = 'https://www.tabnews.com.br/api/v1/contents';
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
 	const getPostsInfo = async () => {
-		const postsFetch = await fetch('https://www.tabnews.com.br/api/v1/contents');
+		let postsFetch = await fetch(api_base_url);
 		const result = await postsFetch.json();
 		setPosts([...result]);
 		setIsLoading(false);
