@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
 			<body>
 				<header className={styles.header}>
 					<nav>
-						<div className={styles.logotype}>
+						<div className={styles.logotype} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
 							{isDesktop
 								? <Image
 									src={currentTheme === 'dark' ? Logotype : DarkLogotype}
