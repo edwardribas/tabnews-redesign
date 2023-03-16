@@ -3,16 +3,15 @@
 import { useEffect, useState } from "react";
 import Article from "./components/article";
 import styles from './page.module.css';
+import { getPopularArticles } from "./api/articles";
 
 export default function Home() {
-	const api_base_url = 'https://www.tabnews.com.br/api/v1/contents';
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-
+	
 	const getPostsInfo = async () => {
-		let postsFetch = await fetch(api_base_url);
-		const result = await postsFetch.json();
-		setPosts([...result]);
+		const popularArticles = await getPopularArticles();
+		setPosts([...popularArticles]);
 		setIsLoading(false);
 	}
 
