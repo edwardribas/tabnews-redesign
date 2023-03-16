@@ -1,7 +1,7 @@
 'use client';
 
 import './globals.css'
-import styles from './layout.module.css';
+import styles from './layout.module.scss';
 import Image from 'next/image';
 import Logotype from '../public/logotype.svg';
 import DarkLogotype from '../public/logotype_dark.svg';

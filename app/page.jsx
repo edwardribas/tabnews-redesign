@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Article from "./components/article";
-import styles from './page.module.css';
+import styles from './page.module.scss';
 import { getPopularArticles } from "./api/articles";
 
 export default function Home() {

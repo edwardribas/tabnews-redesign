@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './article.module.css';
+import styles from './article.module.scss';
 import moment from 'moment/moment';
 import 'moment/locale/pt-br'
 moment.locale('pt-br');
