@@ -52,12 +52,14 @@ export default function RootLayout({ children }) {
 									src={currentTheme === 'dark' ? Logotype : DarkLogotype}
 									width='max-content'
 									height={25}
+									priority
 									alt="Logotipo do Tabnews"
 								/> 
 								: <Image
 									src={currentTheme === 'dark' ? LogoLight : LogoDark}
 									width='max-content'
 									height={25}
+									priority
 									alt="Logotipo do Tabnews"
 								/>
 							}
@@ -86,7 +88,7 @@ export default function RootLayout({ children }) {
 							<span onClick={() => setCurrentTheme(currentTheme === 'dark' ? 'light' : 'dark')}>
 								<Image
 									src={currentTheme === 'dark' ? SunLight : SunDark}
-									width={120}
+									width="auto"
 									height={33}
 									alt="Ícone de alternador de tema"
 								/>

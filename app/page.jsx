@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import Article from "./components/article";
+import Article from "./components/Article";
 import styles from './page.module.scss';
-import { getPopularArticles } from "./api/articles";
+import { getPopularArticles, getRecentArticles } from "./api/articles";
+import { Loading } from "./components/Loading";
+import { getArticleInfoFromAPI } from "./api/utils/articles";
 
-export default function Home() {
+export default function Page() {
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	
@@ -16,16 +18,13 @@ export default function Home() {
 	}
 
 	useEffect(() => {
+		setIsLoading(true);
 		getPostsInfo();
 	}, [])
 
 	return (
 		<>
-			{isLoading && (
-				<span className={styles.loader}>
-					<span></span>
-				</span>
-			)}
+			<Loading loading={isLoading}/>
 
 			{!isLoading && posts.length && (
 				<div className={styles.posts}>
@@ -33,12 +32,7 @@ export default function Home() {
 						<Article
 							key={i}
 							index={i + 1}
-							comments={articleInfo.children_deep_count}
-							title={articleInfo.title}
-							tabcoins={articleInfo.tabcoins}
-							author={articleInfo.owner_username}
-							created_at={articleInfo.published_at}
-							slug={articleInfo.slug}
+							{...getArticleInfoFromAPI(articleInfo)}
 						/>
 					)))}
 				</div>
