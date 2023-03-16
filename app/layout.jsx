@@ -16,14 +16,17 @@ export default function RootLayout({ children }) {
 	const [screenSize, setScreenSize] = useState(1000);
 	const isDesktop = screenSize > 795;
 	const [openMobileMenu, setOpenMobileMenu] = useState(false);
-	const [currentTheme, setCurrentTheme] = useState('light');
+	const [currentTheme, setCurrentTheme] = useState('dark');
 	
 	useEffect(() => {
-		localStorage.setItem('theme', currentTheme)
+		let oldValue;
+		setCurrentTheme(oldTheme => oldValue = oldTheme);
+		oldValue !== currentTheme &&
+			localStorage.setItem('theme', currentTheme === 'dark' ? 'dark' : 'light');
 	}, [currentTheme])
 
 	useEffect(() => {
-		setCurrentTheme(localStorage.getItem('theme') ?? 'dark');
+		setCurrentTheme(localStorage.getItem('theme'));
 		window.onresize = () => setScreenSize(window.innerWidth);
 		window.onscroll = () => setOpenMobileMenu(false);
 		setScreenSize(window.innerWidth);
@@ -85,7 +88,7 @@ export default function RootLayout({ children }) {
 									src={currentTheme === 'dark' ? SunLight : SunDark}
 									width={120}
 									height={33}
-									alt="Logotipo do Tabnews"
+									alt="Ícone de alternador de tema"
 								/>
 							</span>
 							{!isDesktop && (
