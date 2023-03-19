@@ -14,10 +14,14 @@ html{
 	--articleCountEllipseColor: #BFBFBF;
 	--footerLinkColor: #3C89E4;
 	--footerBorderColor: #323232;
+	--articlePagination: #3C89E4;
+	--articlePaginationBorder: #3C89E4;
+	--articleDisabledPagination: #ddd;
 
 	/* Light theme */
 	--headerBackground: #FFFFFF;
-	--headerActiveNavLinkBg: #F6F6F6;
+	--headerNavLinkHover: #f1f1f1;
+	--headerActiveNavLinkBg: #e7e7e7;
 	--headerBorderColor: #BDBDBD;
 	--headerNavLinkColor: #353535;
 	--showMoreButtonColor: #3A3A3A;
@@ -29,11 +33,13 @@ html{
 html[theme=dark] {
 	/* Dark theme */
 	--headerBackground: #1C1C1C;
-	--headerActiveNavLinkBg: #272727;
-	--headerBorderColor: #333333;
+	--headerNavLinkHover: #272727;
+	--headerActiveNavLinkBg: #313131;
+	--headerBorderColor: #3b3b3b;
 	--headerNavLinkColor: #BDBDBD;
 	--showMoreButtonColor: #DEDEDE;
 	--articleTitle: #CFCFCF;
+	--articleDisabledPagination: #555555;
 	--mainBackground: #202020;
 	--mainColor: #FBFBFB;
 }

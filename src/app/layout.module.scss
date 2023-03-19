@@ -40,17 +40,17 @@
 					color: var(--headerNavLinkColor);
 					transition: color .25s ease, background-color .25s ease;
 
-					&:hover {
-						background-color: rgba(60, 60, 60, .05);
-					}
-				}
-
-				&.active {
-					a {
+					&.active {
 						font-weight: 500;
 						background-color: var(--headerActiveNavLinkBg);
 					}
+					&:not(.active) {
+						&:hover {
+							background-color: var(--headerNavLinkHover);
+						}
+					}
 				}
+
 			}
 		}
 

@@ -3,14 +3,29 @@
 import './globals.css'
 import styles from './layout.module.scss';
 import Image from 'next/image';
-import Logotype from '../public/logotype.svg';
-import DarkLogotype from '../public/logotype_dark.svg';
-import SunDark from '../public/sun_dark.svg';
-import SunLight from '../public/sun_light.svg';
-import LogoDark from '../public/logo_dark.svg';
-import LogoLight from '../public/logo_light.svg';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+const NavLink = ({href, children}) => {
+	const pathname = usePathname();
+	const [isActive, setIsActive] = useState(false);
+	
+	useEffect(() => {
+		const keyword = href.match(/[a-zA-Z]/g).join("");
+		const baseURL = `/${keyword}`;
+		setIsActive(String(pathname).includes(baseURL));
+	}, [pathname]);
+
+	return (
+		<Link
+			href={href}
+			className={isActive ? styles.active : undefined}
+		>
+			{children}
+		</Link>
+	)
+}
 
 export default function RootLayout({ children }) {
 	const [screenSize, setScreenSize] = useState(1000);
@@ -42,53 +57,53 @@ export default function RootLayout({ children }) {
 				<meta charSet='UTF-8'/>
 				<meta httpEquiv='X-UA-Compatible' content='IE=edge'/>
 				<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+				<link rel="shortcut icon" href="/favicon.ico"/>
 			</head>
 			<body>
 				<header className={styles.header}>
 					<nav>
-						<div className={styles.logotype} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+						<Link
+							href="/"
+							className={styles.logotype}
+							onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+						>
 							{isDesktop
 								? <Image
-									src={currentTheme === 'dark' ? Logotype : DarkLogotype}
-									width='max-content'
+									src={currentTheme === 'dark' ? '/logotype.svg' : '/logotype_dark.svg'}
+									width={120}
 									height={25}
 									priority
 									alt="Logotipo do Tabnews"
 								/> 
 								: <Image
-									src={currentTheme === 'dark' ? LogoLight : LogoDark}
-									width='max-content'
+									src={currentTheme === 'dark' ? '/logo_light.svg' : '/logo_dark.svg'}
+									width={50}
 									height={25}
 									priority
 									alt="Logotipo do Tabnews"
 								/>
 							}
 							
-						</div>
+						</Link>
 
 						<ul className={!isDesktop && openMobileMenu ? styles.active : undefined}>
-							<li className={styles.active}>
-								<Link href="#">
+							<li>
+								<NavLink href="/relevantes">
 									Relevantes
-								</Link>
+								</NavLink>
 							</li>
 							<li>
-								<Link href="">
+								<NavLink href="/recentes">
 									Recentes
-								</Link>
-							</li>
-							<li>
-								<Link href="">
-									Salvos
-								</Link>
+								</NavLink>
 							</li>
 						</ul>
 
 						<div className={styles.buttons}>
 							<span onClick={() => setCurrentTheme(currentTheme === 'dark' ? 'light' : 'dark')}>
 								<Image
-									src={currentTheme === 'dark' ? SunLight : SunDark}
-									width="auto"
+									src={currentTheme === 'dark' ? '/sun_light.svg' : '/sun_dark.svg'}
+									width={35}
 									height={33}
 									alt="Ícone de alternador de tema"
 								/>
@@ -104,14 +119,14 @@ export default function RootLayout({ children }) {
 					</nav>
 				</header>
 
-				<main>
+				<main className={styles.main}>
 					{children}
 				</main>
 
 				<footer className={styles.footer}>
 					<div className={styles.logotype}>
 						<Image
-							src={currentTheme === 'dark' ? Logotype : DarkLogotype}
+							src={currentTheme === 'dark' ? '/logotype.svg' : '/logotype_dark.svg'}
 							width={120}
 							height={25}
 							alt="Logotipo do Tabnews"
