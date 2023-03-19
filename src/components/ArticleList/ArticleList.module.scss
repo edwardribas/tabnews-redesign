@@ -5,19 +5,30 @@
     width: 100%;
     max-width: 675px;
     margin: 0 auto;
+    position: relative;
 }
 
 .pagination {
+    width: 100%;
+    max-width: fit-content;
+    margin: 0 auto;
+    position: sticky;
+    bottom: 20px;
     display: flex;
     justify-content: center;
     gap: 20px;
 
     a {
-        color: var(--articlePagination);
-        font-size: 1.1rem;
-        padding: 8px 16px;
-        border-radius: 30px;
+        display: flex;
+        height: 45px;
+        width: 45px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
         border: 1px solid var(--articlePaginationBorder);
+        color: var(--articlePagination);
+        font-size: 1.2rem;
+        background-color: var(--headerBackground);
         transition: color .2s ease, border .2s ease, background-color .2s ease;
         font-weight: 300;
 

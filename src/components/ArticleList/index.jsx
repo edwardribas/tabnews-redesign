@@ -6,6 +6,7 @@ import { Loading } from '../Loading';
 import Link from 'next/link';
 import { getArticles } from "../../app/api/articles";
 import { Article } from '../Article';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { usePathname, redirect } from 'next/navigation';
 
 export const ArticleList = ({
@@ -51,8 +52,12 @@ export const ArticleList = ({
 					}))}
 
 					<div className={styles.pagination}>
-						<Link href={previousPageLink} disabled={+page === 1}> Anterior </Link>
-						<Link href={nextPageLink}> Próximo </Link>
+						<Link href={previousPageLink} disabled={+page === 1}>
+							<BsArrowLeft/>
+						</Link>
+						<Link href={nextPageLink}>
+							<BsArrowRight/>
+						</Link>
 					</div>
 				</div>
 			)}
